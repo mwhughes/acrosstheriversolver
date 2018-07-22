@@ -25,11 +25,7 @@ public class AcrossRiverSolver {
 		HashSet<Integer> queudIds = new HashSet<>();		
 	
 		LinkedBlockingQueue<BoardState> toExplore = new LinkedBlockingQueue<>();
-		
-		
-		HashSet<BoardState> boardStatesExplored = new HashSet<>();
-		toExplore.addAll(initialState.getAdmissibleNeighboringBoardStates());
-		
+			
 		// Set 1 equals 1 to play game
 		if ("1".equals("2")){
 			waitForEnter("TEST", initialState);
@@ -121,10 +117,7 @@ public class AcrossRiverSolver {
 		return bs;
 	}
 	
-	private void printNewStateAndOptions(int newStateHash){
-		
-	}
-	
+
 	public static void waitForEnter(String message, BoardState current) {
 		   // using InputStreamReader
 		
