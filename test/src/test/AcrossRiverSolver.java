@@ -21,31 +21,18 @@ public class AcrossRiverSolver {
 		BoardState initialState = test.initialState(); //BoardState.getBoardStateFromHashCode(10120);//
 		BoardState endState = test.endState();
 		
-		System.out.println("end hash" + endState.hashCode());
 		
-		HashSet<Integer> exploredIds = new HashSet<>();
-		HashSet<Integer> queudIds = new HashSet<>();
-		HashMap<Integer, BoardState> exploredState = new HashMap<>();
-		
+		HashSet<Integer> queudIds = new HashSet<>();		
 	
 		LinkedBlockingQueue<BoardState> toExplore = new LinkedBlockingQueue<>();
 		
 		
 		HashSet<BoardState> boardStatesExplored = new HashSet<>();
 		toExplore.addAll(initialState.getAdmissibleNeighboringBoardStates());
+		
+		// Set 1 equals 1 to play game
 		if ("1".equals("2")){
 			waitForEnter("TEST", initialState);
-			initialState.printState();
-			
-			System.out.println(toExplore.size());
-			for (BoardState test2 : toExplore){
-				test2.printState();
-			}
-			 
-
-			
-
-			System.out.println(exploredIds.size());
 			return;
 		}
 		
@@ -57,7 +44,7 @@ public class AcrossRiverSolver {
 			count++;
 			BoardState current = toExplore.poll();
 		//current.printState();
-			exploredIds.add(current.hashCode());
+			queudIds.add(current.hashCode());
 			solution = current;
 			if (current.hashCode() == endState.hashCode()){
 				solved = true;
@@ -65,7 +52,7 @@ public class AcrossRiverSolver {
 
 			} else {
 				for (BoardState neighbor : current.getAdmissibleNeighboringBoardStates()){
-					if (!exploredIds.contains(neighbor.hashCode()) && !queudIds.contains(neighbor.hashCode())){
+					if (!queudIds.contains(neighbor.hashCode())){
 						toExplore.add(neighbor);		
 						queudIds.add(neighbor.hashCode());
 					}
@@ -73,9 +60,7 @@ public class AcrossRiverSolver {
 			}
 			
 		}
-		System.out.println(count);
-		System.out.println("solved?" + solved);
-		System.out.println("acceptable?" + solution.isBoardStateAcceptable());
+		System.out.println("solved? " + solved);
 		
 		ArrayList<BoardState> solutionList = new ArrayList<>();
 		
@@ -92,16 +77,8 @@ public class AcrossRiverSolver {
 			System.out.println(state.getLastMove());
 			state.printState();
 		}
+	
 		
-		
-		System.out.println(solved);
-		
-		endState.printState();
-		initialState.printState();
-		
-		System.out.println(endState.hashCode());
-		
-		System.out.println("hello world");
 		solution.printState();
 	}
 	
