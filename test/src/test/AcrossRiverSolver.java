@@ -41,7 +41,6 @@ public class AcrossRiverSolver {
 			BoardState current = toExplore.poll();
 		//current.printState();
 			queudIds.add(current.hashCode());
-			solution = current;
 			if (current.hashCode() == endState.hashCode()){
 				solved = true;
 				solution = current;
